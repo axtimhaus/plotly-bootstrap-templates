@@ -1,37 +1,9 @@
 import json
-
+from typing import List
 import plotly.io as pio
-
 from importlib.resources import files
-from importlib.metadata import (
-    PackageNotFoundError,
-    version,
-)
 
-from packaging import version as packaging_version
-
-min_version = "6.0.0"
-max_version = "7.0.0"
-plotly_version = version("plotly")
-parse_min_version = packaging_version.parse("6.0.0")
-parse_max_version = packaging_version.parse("7.0.0")
-parse_plotly_version = packaging_version.parse(plotly_version)
-if not (parse_min_version <= parse_plotly_version < parse_max_version):
-    raise ImportError(
-        f"Incompatible Plotly version: {plotly_version}. Expected >={min_version}, <{max_version}.\n"
-    )
-
-try:
-    __version__ = version("dash_bootstrap_templates")
-except PackageNotFoundError:
-    # package is not installed
-    pass
-
-"""
-Use this function to make the bootstrap figure templates available in your Dash app
-"""
-
-dbc_templates = [
+DBC_TEMPLATES = [
     "bootstrap",
     "cerulean",
     "cosmo",
@@ -76,7 +48,7 @@ def read_template(theme):
     pio.templates[theme] = template
 
 
-def load_figure_template(themes="bootstrap"):
+def load_figure_template(themes: List[str] | str = "bootstrap"):
     """Add figure template to plotly.io and sets the default template
 
     Keyword arguments:
@@ -88,13 +60,13 @@ def load_figure_template(themes="bootstrap"):
     themes is a list. If the themes attribute is invalid, the
     "bootstrap" theme will be used.
     """
-    if type(themes) is list:
+    if isinstance(themes, list):
         for theme in themes:
             read_template(theme)
         pio.templates.default = themes[0]
 
     elif themes == "all":
-        for theme in dbc_templates:
+        for theme in DBC_TEMPLATES:
             read_template(theme)
             read_template(f"{theme}_dark")
         pio.templates.default = "bootstrap"
@@ -102,6 +74,3 @@ def load_figure_template(themes="bootstrap"):
     else:
         read_template(themes)
         pio.templates.default = themes
-
-
-from aio import ThemeSwitchAIO, ThemeChangerAIO, template_from_url
