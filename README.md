@@ -1,7 +1,7 @@
 # Plotly Bootstrap Templates
 
->>> [!NOTE]
->>> has been forked from <https://github.com/AnnMarieW/dash-bootstrap-templates>. All dependencies on `dash` and `dash-bootstrap-components` have been removed from the installable package to allow usage with plain plotly graphing library without the need to install dash. Package management has been modernized to `uv` and the package code has been cleaned up for the targeted purpose.
+> [!NOTE]
+> has been forked from <https://github.com/AnnMarieW/dash-bootstrap-templates>. All dependencies on `dash` and `dash-bootstrap-components` have been removed from the installable package to allow usage with plain plotly graphing library without the need to install dash. Package management has been modernized to `uv` and the package code has been cleaned up for the targeted purpose.
 
 ## Figure Template Quickstart
 
