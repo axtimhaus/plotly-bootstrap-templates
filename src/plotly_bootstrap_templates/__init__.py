@@ -37,12 +37,12 @@ DBC_TEMPLATES = [
 def read_template(theme):
     try:
         with (
-            files("dash_bootstrap_templates") / "templates" / f"{theme}.json"
+            files("plotly_bootstrap_templates") / "templates" / f"{theme}.json"
         ).open() as f:
             template = json.load(f)
     except IOError:
         with (
-            files("dash_bootstrap_templates") / "templates" / "bootstrap.json"
+            files("plotly_bootstrap_templates") / "templates" / "bootstrap.json"
         ).open() as f:
             template = json.load(f)
     pio.templates[theme] = template

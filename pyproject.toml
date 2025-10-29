@@ -4,41 +4,37 @@ version = "2.1.0"
 description = "A collection of Plotly figure templates with a Bootstrap theme"
 readme = "README.md"
 requires-python = ">=3.9"
-license="MIT"
-authors = [
-    "Max Weiner",
-    "Ann Marie Ward"
-]
+license = "MIT"
+authors = [{ name = "Max Weiner" }, { name = "Ann Marie Ward" }]
 classifiers = [
-   "Development Status :: 3 - Alpha",
-   "Framework :: Dash",
-   "License :: OSI Approved :: MIT License",
-   "Programming Language :: Python :: 3.7",
-   "Programming Language :: Python :: 3.8",
-   "Programming Language :: Python :: 3.9",
-   "Programming Language :: Python :: 3.10",
-   "Programming Language :: Python :: 3.11",
-   "Programming Language :: Python :: 3 :: Only",
-   "Topic :: Scientific/Engineering :: Visualization",
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Scientific/Engineering :: Visualization",
 ]
-dependencies = [
-    "plotly~=6.3",
-]
+dependencies = ["plotly~=6.3"]
 
 
 [dependency-groups]
-dev = [
-    "colormath>=3.0.0",
-    "dash-bootstrap-components~=2.0",
-    "numpy~=2.0",
-    "spectra~=0.1.0",
-    "tinycss2~=1.4",
+dev = ["numpy~=2.0", "pandas~=2.3", "pytest~=8.4"]
+create = [
+  "colormath>=3.0.0",
+  "dash-bootstrap-components~=2.0",
+  "numpy~=2.0",
+  "spectra~=0.1.0",
+  "tinycss2~=1.4",
 ]
 
 [project.urls]
 Documentation = "https://github.com/axtimhaus/plotly-bootstrap-templates/blob/main/README.md"
 Issues = "https://github.com/axtimhaus/plotly-bootstrap-templates/issues"
 Source = "https://github.com/axtimhaus/plotly-bootstrap-templates/"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.hatch.build]
 packages = ["src/plotly_bootstrap_templates"]
