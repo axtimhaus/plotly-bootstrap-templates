@@ -1,6 +1,6 @@
 [project]
 name = "plotly-bootstrap-templates"
-version = "2.1.0"
+version = "2.1.0post1"
 description = "A collection of Plotly figure templates with a Bootstrap theme"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -36,8 +36,11 @@ Source = "https://github.com/axtimhaus/plotly-bootstrap-templates/"
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.hatch.build]
-packages = ["src/plotly_bootstrap_templates"]
+[tool.hatch.build.targets.wheel]
+sources = ["src"]
+
+[tool.hatch.build.targets.sdist]
+only-include = ["src"]
 
 [tool.pyright]
 venvPath = "."
