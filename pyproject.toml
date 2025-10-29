@@ -28,7 +28,11 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "colormath>=3.0.0",
     "dash-bootstrap-components~=2.0",
+    "numpy~=2.0",
+    "spectra~=0.1.0",
+    "tinycss2~=1.4",
 ]
 
 [project.urls]

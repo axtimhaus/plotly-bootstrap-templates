@@ -2,24 +2,12 @@ import json
 
 import plotly.io as pio
 
-try:
-    from importlib.resources import files
-except ImportError:
-    # if using Python 3.8 or lower import from the backport
-    from importlib_resources import files
+from importlib.resources import files
+from importlib.metadata import (
+    PackageNotFoundError,
+    version,
+)
 
-try:
-    from importlib.metadata import (
-        PackageNotFoundError,
-        version,
-    )
-except ModuleNotFoundError:
-    # if using Python 3.7, import from the backport
-    from importlib_metadata import (
-        PackageNotFoundError,
-        version,
-    )
-    
 from packaging import version as packaging_version
 
 min_version = "6.0.0"
@@ -29,7 +17,9 @@ parse_min_version = packaging_version.parse("6.0.0")
 parse_max_version = packaging_version.parse("7.0.0")
 parse_plotly_version = packaging_version.parse(plotly_version)
 if not (parse_min_version <= parse_plotly_version < parse_max_version):
-    raise ImportError(f"Incompatible Plotly version: {plotly_version}. Expected >={min_version}, <{max_version}.\n")
+    raise ImportError(
+        f"Incompatible Plotly version: {plotly_version}. Expected >={min_version}, <{max_version}.\n"
+    )
 
 try:
     __version__ = version("dash_bootstrap_templates")
@@ -68,19 +58,19 @@ dbc_templates = [
     "vapor",
     "yeti",
     "zephyr",
-    "vizro"
+    "vizro",
 ]
 
 
 def read_template(theme):
     try:
         with (
-                files("dash_bootstrap_templates") / "templates" / f"{theme}.json"
+            files("dash_bootstrap_templates") / "templates" / f"{theme}.json"
         ).open() as f:
             template = json.load(f)
     except IOError:
         with (
-                files("dash_bootstrap_templates") / "templates" / "bootstrap.json"
+            files("dash_bootstrap_templates") / "templates" / "bootstrap.json"
         ).open() as f:
             template = json.load(f)
     pio.templates[theme] = template
@@ -108,7 +98,6 @@ def load_figure_template(themes="bootstrap"):
             read_template(theme)
             read_template(f"{theme}_dark")
         pio.templates.default = "bootstrap"
-
 
     else:
         read_template(themes)
