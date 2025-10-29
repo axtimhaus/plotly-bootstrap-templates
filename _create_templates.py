@@ -28,6 +28,7 @@ def patch_asscalar(a):
     """
     return a.item()
 
+
 setattr(np, "asscalar", patch_asscalar)
 
 
@@ -133,7 +134,6 @@ def best_darkening(c1, c2, c1_step=(1, 1), c2_step=(1, 1)):
 
 
 def separate_colorway(html_colors):
-
     try:
         raw_colors = [
             spectra.rgb(*[c / 255 for c in to_rgb_tuple(clr)]) for clr in html_colors
@@ -333,11 +333,9 @@ def get_role_colors(rule_props):
 
 
 def get_colorscale(color_a, color_b):
-
-   # A range between 'primary' and 'warning'
-    color1=spectra.html(color_a)
-    color2=spectra.html(color_b).brighten(20)
-
+    # A range between 'primary' and 'warning'
+    color1 = spectra.html(color_a)
+    color2 = spectra.html(color_b).brighten(20)
 
     # A range of primary colors
     # color1 = spectra.html(color_a).brighten(-20)
@@ -345,12 +343,12 @@ def get_colorscale(color_a, color_b):
 
     scale = np.linspace(0, 1, 11)
     theme_swatches = spectra.range([color1, color2], 11)
-    return [[k,v.hexcode] for k,v in zip(scale,theme_swatches)]
+    return [[k, v.hexcode] for k, v in zip(scale, theme_swatches)]
 
 
 def get_template(bg_color):
     # spectra.lab(L, a, b)   L is lightness from 0 to 100
-    lightness =spectra.html(bg_color).to("lab").values[0]
+    lightness = spectra.html(bg_color).to("lab").values[0]
     if lightness < 50:
         return copy.deepcopy(pio.templates["plotly_dark"])
     else:
@@ -358,7 +356,6 @@ def get_template(bg_color):
 
 
 def build_plotly_template_from_bootstrap_css_text(css_text, color_mode):
-
     # Parse css text
     rule_props = parse_rules_from_bootstrap_css(css_text, color_mode)
 
@@ -393,7 +390,6 @@ def build_plotly_template_from_bootstrap_css_text(css_text, color_mode):
     ]
     colorway = [role_colors[r] for r in colorway_roles]
     colorway = separate_colorway(colorway)
-
 
     colorscale = get_colorscale(role_colors["primary"], role_colors["danger"])
 
@@ -455,7 +451,7 @@ Generate Templates
 
 # set relative path
 PATH = pathlib.Path(__file__).parent
-TEMPLATES_PATH = PATH.joinpath("./src/dash_bootstrap_templates/templates").resolve()
+TEMPLATES_PATH = PATH.joinpath("./src/plotly_bootstrap_templates/templates").resolve()
 
 
 # Creates all templates and save them as json files
@@ -473,7 +469,9 @@ print("Generating dark templates...")
 
 # dark color mode
 for theme, url in dbc_themes_url.items():
-    dbc_template = try_build_plotly_template_from_bootstrap_css_path(url, color_mode="dark")
+    dbc_template = try_build_plotly_template_from_bootstrap_css_path(
+        url, color_mode="dark"
+    )
     template_name = theme.lower() + "_dark.json"
     with open(TEMPLATES_PATH.joinpath(template_name), "w") as f:
         json.dump(dbc_template, f, cls=PlotlyJSONEncoder)
