@@ -1,4 +1,5 @@
-#
+#!/usr/bin/env -S uv run --script --group create
+
 """
 This is a pre-processing step that generates Plotly figure templates for the
 Bootstrap/Bootswatch themes that are available in the dash-bootstrap-components
@@ -71,7 +72,6 @@ _colors.py
 
 try:
     import spectra
-    from colormath.density import auto_density
     from colormath.color_objects import LabColor as LabColor
     from colormath.color_diff import delta_e_cie1994
 except ImportError:
@@ -144,7 +144,7 @@ def separate_colorway(html_colors):
 
     test_colors = [white] + raw_colors + [black]
 
-    darkenings = list(np.zeros(len(test_colors)))
+    darkenings = list(np.zeros(len(test_colors), dtype=int))
     threshold = 36
 
     max_shift = 16
