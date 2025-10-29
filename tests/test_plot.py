@@ -7,7 +7,7 @@ import webbrowser
 
 @pytest.mark.parametrize(
     "theme",
-    [v for t in plotly_bootstrap_templates.DBC_TEMPLATES for v in [t, f"{t}_dark"]],
+    plotly_bootstrap_templates.TEMPLATES + plotly_bootstrap_templates.TEMPLATES_DARK,
 )
 def test_plot(theme: str, tmp_path: Path):
     df = px.data.gapminder()

@@ -3,7 +3,7 @@ from typing import List
 import plotly.io as pio
 from importlib.resources import files
 
-DBC_TEMPLATES = [
+TEMPLATES = [
     "bootstrap",
     "cerulean",
     "cosmo",
@@ -32,6 +32,8 @@ DBC_TEMPLATES = [
     "zephyr",
     "vizro",
 ]
+
+TEMPLATES_DARK = [f"{t}_dark" for t in TEMPLATES]
 
 
 def read_template(theme):
@@ -66,9 +68,8 @@ def load_figure_template(themes: List[str] | str = "bootstrap"):
         pio.templates.default = themes[0]
 
     elif themes == "all":
-        for theme in DBC_TEMPLATES:
+        for theme in TEMPLATES + TEMPLATES_DARK:
             read_template(theme)
-            read_template(f"{theme}_dark")
         pio.templates.default = "bootstrap"
 
     else:
